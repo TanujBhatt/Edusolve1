@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" type="png" href="images/icon/favicon.png">
+	<title>Login SignUp</title>
+	<link rel="stylesheet" type="text/css" href="loginStyle.css">
+	
+	<script>
+		// Simulated backend API functions
+function sendOTPForRegistration(phoneNumber) {
+    // Simulate API call to send OTP
+    const otp = Math.floor(1000 + Math.random() * 9000); // Generate a random OTP
+    localStorage.setItem('registration_otp', otp); // Store OTP in localStorage
+    console.log(`OTP sent: ${otp}`);
+}
+
+function validateOTP(enteredOTP) {
+    const storedOTP = localStorage.getItem('registration_otp');
+    return enteredOTP === storedOTP;
+}
+
+// Event listener for registration form submit
+document.getElementById('register').addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    const fname = document.getElementById('fname').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const enteredOTP = document.getElementById('otp_register').value;
+
+    if (validateOTP(enteredOTP)) {
+        // Simulate API call to register the user
+        // Replace this with actual API call
+        console.log(`User ${fname} registered with email ${email} and password ${password}`);
+        
+        // Redirect to OTP validation page
+        window.location.href = 'otp_validation.html';
+    } else {
+        alert('Invalid OTP. Please try again.');
+    }
+});
+
+// Event listener for sending OTP during registration
+document.getElementById('sendOTPRegisterButton').addEventListener('click', function () {
+    const phoneNumber = document.getElementById('phone').value; // Get user's phone number during registration
+    sendOTPForRegistration(phoneNumber);
+    alert('OTP sent. Check your phone for the OTP.');
+});
+
+	</script>
+
+  <!-- </script> -->
+</head>
+<body>
+		<div class="form-box">
+			<div class="button-box">
+				<div id="btn"></div>
+				<button type="button" class="toggle-btn" id="log" onclick="login()" style="color: #fff;">Log In</button>
+				<button type="button" class="toggle-btn" id="reg" onclick="register()">Register</button>
+			</div>
+			<div class="social-icons">
+				<img src="images/icon/fb2.png">
+				<img src="images/icon/insta2.png">
+				<img src="images/icon/tt2.png">
+			</div>
+			
+			<!-- Login Form -->
+			<form id="login" class="input-group" action="index.html">
+				<div class="inp">
+					<img src="images/icon/user.png"><input type="text" id="email" class="input-field" placeholder="Username or Phone Number" style="width: 88%; border:none;" required="required">
+				</div>
+				<div class="inp">
+					<img src="images/icon/password.png"><input type="password" id="password" class="input-field" placeholder="Password" style="width: 88%; border: none;" required="required">
+				</div>
+				<input type="checkbox" class="check-box">Remember Password
+				<button type="submit" class="submit-btn" onclick="DoneSubmit()">Log In</button>
+			</form>
+
+
+			<div class="other" id="other">
+				<div class="instead">
+					<h3>or</h3>
+				</div>
+				<button class="connect" onclick="google()">
+					<img src="images/icon/google.png"><span>Sign in with Google</span>
+				</button>
+			</div>
+			
+			<!-- Registration Form -->
+			<form id="register" class="input-group">
+				<input id="fname" type="text" class="input-field" placeholder="Full Name" required="required">
+				<input type="email" class="input-field" placeholder="Email Address" required="required">
+				<input type="password" class="input-field" placeholder="Create Password" name="psame" required="required">
+				<input type="password" class="input-field" placeholder="Confirm Password" name="psame" required="required">
+				<input type="checkbox" class="check-box" id="chkAgree" onclick="goFurther()">I agree to the Terms & Conditions
+				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" onclick="DoneSubmit()">Register</button>
+			</form>
+		</div>
+		
+		<script type="text/javascript" src="script.js"></script>
+		
+
+</body>
+</html>

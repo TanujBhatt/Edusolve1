@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- ... head content ... -->
+</head>
+<body>
+    <script>
+                    // Simulated OTP validation
+            document.getElementById('otpValidationForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                
+                const enteredOTP = document.getElementById('otp_validation').value;
+
+                if (validateOTP(enteredOTP)) {
+                    alert('OTP validation successful. You are now registered.');
+                    // Perform any other actions, such as logging the user in
+                } else {
+                    alert('Invalid OTP. Please try again.');
+                }
+            });
+
+    </script>
+    <div class="form-box">
+        <h2>OTP Validation</h2>
+        <form id="otpValidationForm">
+            <div class="inp">
+                <img src="images/icon/otp.png">
+                <input type="text" id="otp_validation" class="input-field" placeholder="Enter OTP" style="width: 88%; border: none;" required="required">
+            </div>
+            <button type="submit" class="submit-btn" id="validateOTPButton">Validate OTP</button>
+        </form>
+    </div>
+    <script type="text/javascript" src="otp_validation_script.js"></script>
+</body>
+</html>
